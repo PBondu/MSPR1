@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+.hidden{
+  display: none;
+}
+
+.flexRow{
+  display: flex;
+  flex-direction: row;
+}
+
+.centerAll{
+  justify-content: center;
+  align-items: center;
+}
+
+.alignCenter{
+  align-items: center;
+}
+
+.spaceAround{
+  justify-content: space-around;
+}
+
+
+/*Change the color of the slides buttons*/
+:root {
+  --swiper-theme-color: mediumspringgreen !important;
+}
+/*Style des images inclus dans le slideur*/
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+

@@ -4,23 +4,20 @@ import burger from "/public/HamburgerMenu.svg"
 
 export default function Header(){
   return (
-    <header className="flexRow spaceAround alignCenter bg-blue-500">
-      <div className="flexRow centerAll w-2/6">
+    <header className="flexRow spaceAround alignCenter bg-blue-500 sticky top-0">
+      <div className="flexRow centerAll w-full">
         <Image
           src={logo}
           width={96}
           height={64}
-          alt="Logo du blog de voyage"
+          alt="Logo du festival Zikos"
         />
       </div>
-      <div className="flexRow centerAll w-1/2">
-        <h1 className="text-2xl font-bold text-white">Zikos</h1>
-      </div>
-      <div className="w-1/6 flex centerAll">
+      <div className="flex flex-row justify-center bg-slate-700 h-fit w-fit py-2 px-3 text-m items-center rounded-xl absolute right-3">
         <Image
           src={burger}
-          width={40}
-          height={40}
+          width={30}
+          height={30}
           alt="Menu Hamburger"
         />
       </div>

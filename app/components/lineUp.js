@@ -1,21 +1,20 @@
 "use client"
 
 import { useContext } from 'react';
-import { DataWp } from './fetchWp';
+import { SortedInfo } from './sortConcertData';
 import ShowInfo from './showInfo';
-import Sort from './sort';
 
 export default function LineUp() {
 
-  const concertInfo = useContext(DataWp);
+  const concertInfo = useContext(SortedInfo);
 
   if (!concertInfo) {
     return <div>Loading...</div>;
   };
   return (
 
-    <ul className="flex flex-col h-80 overflow-y-scroll bg-slate-300">
-      <Sort />
+    <ul className="flex flex-col h-80 overflow-y-scroll bg-blue-300">
+
       {concertInfo.map((post, index) => (
         <ShowInfo
           key={index}
@@ -23,6 +22,7 @@ export default function LineUp() {
           spot={post.acf.spot}
           time={post.acf.horaires}
         />
+
       ))}
     </ul>
   );

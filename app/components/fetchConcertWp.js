@@ -3,15 +3,15 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 // Permet le transfert des données aux autres composants
-const DataWp = createContext();
+const DataConcertWp = createContext();
 
-const FetchData = ({ children }) => {
+const FetchConcertData = ({ children }) => {
   const [concertData, setConcertData] = useState([]);
   useEffect(() => {
     async function loadConcertData() {
       const response = await fetch('http://localhost/zikos/wp-json/wp/v2/concert');
       if (!response.ok) {
-        // oups! something went wrong
+        console.log("response not ok");
         return;
       }
 
@@ -24,9 +24,9 @@ const FetchData = ({ children }) => {
 
 
   return (
-    <DataWp.Provider value={concertData}>
+    <DataConcertWp.Provider value={concertData}>
       {children}
-    </DataWp.Provider>
+    </DataConcertWp.Provider>
   );
 };
-export { DataWp, FetchData };
+export { DataConcertWp, FetchConcertData };

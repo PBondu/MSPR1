@@ -1,7 +1,7 @@
 export default function Welcome() {
 
   return (
-    <div id="accueil" className="flex flex-col justify-around items-center h-96 bg-blue-500 text-white">
+    <div className="flex flex-col justify-around items-center h-96 bg-blue-500 text-white">
       <h1 className="m-0 font-bold text-4xl">ZIKOS FESTIVAL</h1>
       <hr className="w-3/4 text-white" />
       <h2 className="font-bold text-2xl text-center">Festival de musique en plein coeur de Paris</h2>

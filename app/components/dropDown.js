@@ -10,7 +10,6 @@ export default function DropDown({ children, button }) {
     isVisible === "none" ? setIsVisible("block"): setIsVisible("none")
   };
   
-//flex flex-col justify-center items-start bg-slate-700 w-fit h-10 px-3 text-m text-white rounded-xl"
   return (
     
     <div className="flex flex-col justify-center items-start">

@@ -38,6 +38,7 @@ export default function Map() {
     <>
       <div className="flex flex-col justify-center items-center bg-[#febd02] h-40">
         <h3 className="text-[#e72a1c] text-xl h-1/4 pt-2">Filtres de la carte</h3>
+        <a href="#leaflet-container">ICI</a>
         <div className="flex flex-row justify-around items-center w-full h-1/2 ">
           <MapFilterButton onClick={() => { handleClickFilterByPing("Scène") }} name="Scène" ping="./location-dot-solid-bleu.svg" />
           <MapFilterButton onClick={() => { handleClickFilterByPing("Shop") }} name="Shop" ping="./location-dot-solid-orange.svg" />
@@ -45,9 +46,9 @@ export default function Map() {
         </div>
         <button className="flex flex-row justify-center bg-slate-700 w-fit h-10 px-3 mb-4 text-m text-white items-center rounded-xl" onClick={() => { setSortedMapData(mapInfo) }}>Effacer Filtres</button>
       </div>
-      <MapContainer center={[48.83658898990498, 2.38145401832107]} zoom={15} scrollWheelZoom={false}>
+      <MapContainer id='leaflet-container' className='h-96' center={[48.83658898990498, 2.38145401832107]} zoom={15} scrollWheelZoom={false}>
 
-        <TileLayer className="h-72"
+        <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />

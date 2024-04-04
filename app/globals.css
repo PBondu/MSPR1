@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.leaflet-container{
-  height: 350px;
-}
-
 * {
   box-sizing: border-box;
 }

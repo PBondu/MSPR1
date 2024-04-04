@@ -9,7 +9,7 @@ export default function Infos() {
           <h3 className="text-xl">Informations Zikos Festival</h3>
           <p>Le festival se déroulera du 21 au 22 juin 2024 inclus</p>
           <p><strong>Horaires :</strong> 10h - 22h</p>
-          <adress><strong>Adresse :</strong> Parc de Bercy 75012 Paris - Entrée près de l'Accord Hotel Arena</adress>
+          <p><strong>Adresse :</strong> Parc de Bercy 75012 Paris - Entrée près de l&#39;Accord Hotel Arena</p>
         </div>
       </DropDown>
       <hr className="w-3/4 my-4 text-white" />
@@ -19,8 +19,8 @@ export default function Infos() {
           <p><strong>Q : </strong>Quels sont les dates et les horaires du festival ?</p>
           <p><strong>R : </strong>Consulter la section Infos Pratiques</p>
           <hr className="w-3/4 my-2 text-white" />
-          <p><strong>Q : </strong>Où Acheter les billets d'entrée ?</p>
-          <p><strong>R : </strong>Lien de la billetterie sur la page d'accueil</p>
+          <p><strong>Q : </strong>Où Acheter les billets d&#39;entrée ?</p>
+          <p><strong>R : </strong>Lien de la billetterie sur la page d&#39;accueil</p>
           <hr className="w-3/4 my-2 text-white" />
           <p><strong>Q : </strong>Comment se rendre au Zikos Festival ?</p>
           <p><strong>R : </strong>métro ligne 6 Bercy</p>

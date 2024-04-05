@@ -16,32 +16,40 @@ export default function Index() {
   return (
     <>
       <FetchConcertData>
+
         <Header />
         <Welcome />
+
         <div id="prog"></div>
         <Title title="Programmation" />
         <SortData>
           <LineUp />
         </SortData>
+
+        <div id="billet"></div>
+        <Title title="Billeterie" />
+        <Billeterie />
+
+        <div id="info"></div>
+        <Title title="Informations" />
+        <Infos />
+
+        <div id="follow"></div>
+        <Title title="Réseaux Sociaux" />
+        <SocialMedia />
+
+        <Title title="Nos Partenaires" />
+        <FetchPartners>
+          <Partners />
+        </FetchPartners>
+
+        <FetchMapData>
+          <div id="map"></div>
+          <Title title="Carte du Festival" />
+          <Map />
+        </FetchMapData>
+        
       </FetchConcertData>
-      <div id="billet"></div>
-      <Title title="Billeterie" />
-      <Billeterie />
-      <div id="info"></div>
-      <Title title="Informations" />
-      <Infos />
-      <div id="follow"></div>
-      <Title title="Réseaux Sociaux" />
-      <SocialMedia />
-      <Title title="Nos Partenaires" />
-      <FetchPartners>
-        <Partners />
-      </FetchPartners>
-      <FetchMapData>
-        <div id="map"></div>
-        <Title title="Carte du Festival" />
-        <Map />
-      </FetchMapData>
     </>
   );
 }

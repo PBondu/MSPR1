@@ -1,19 +1,28 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
-export default function DropDown({ children, button }) {
+export default function DropDown({ children, button, classe }) {
 
+  const [isToggle, setIsToggle] = useState("+");
   const [isVisible, setIsVisible] = useState("none");
 
   function handleClickToggle() {
-    isVisible === "none" ? setIsVisible("block"): setIsVisible("none")
+    isVisible === "none" ? setIsVisible("flex"): setIsVisible("none")
   };
   
+  useEffect(() => {
+    isVisible === "flex" ? setIsToggle("-") : setIsToggle("+");
+    return () => {
+      setIsToggle("+");
+    }
+  }, [handleClickToggle])
+  
+
   return (
     
-    <div className="flex flex-col justify-center items-start">
-      <button className=" bg-slate-700 w-fit h-fit p-2 text-m text-white rounded-xl" onClick={handleClickToggle}>{button}</button>
+    <div className={classe}>
+      <button className=" bg-slate-700 w-fit h-fit p-2 text-xl text-white rounded-xl" onClick={handleClickToggle}>{button} {isToggle}</button>
       <div style={{display:isVisible}}>
         {children}
       </div>

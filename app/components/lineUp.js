@@ -13,7 +13,7 @@ export default function LineUp() {
   };
   return (
 
-    <ul className="flex flex-col h-80 overflow-y-scroll bg-blue-300">
+    <ul className="flex flex-col h-80 overflow-y-scroll bg-slate-200">
 
       {concertInfo.map((post, index) => (
         <ShowInfo

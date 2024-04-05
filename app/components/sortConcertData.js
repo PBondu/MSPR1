@@ -109,16 +109,16 @@ function SortData({ children }) {
     <>
       <div className="flex justify-around items-center bg-[#febd02] min-h-16 text-[#e72a1c] text-xl py-2">
         <DropDown button="Filtrer">
-          <div className="mt-2">
-            <DropDown button="Date +">
-              <select>
+          <div className="flex flex-col justify-around h-fit mt-2">
+            <DropDown button="Date" classe="flex flex-col justify-center items-start my-2">
+              <select className="mt-4 text-slate-700 p-2 rounded-lg">
                 <option onClick={() => { handleClickFilterByDate("2024-03-21") }}>Premier jour</option>
                 <option onClick={() => { handleClickFilterByDate("2024-03-22") }}>Deuxième jour</option>
               </select>
             </DropDown>
 
-            <DropDown button="Emplacement +">
-              <div className="flex flex-col">
+            <DropDown button="Emplacement" classe="flex flex-col justify-center items-start my-2">
+              <div className="flex flex-col items-start mt-4">
                 {concertInfoSortedByGroup.map((post, index) => (
                   index === 0 || post.acf.spot !== concertInfoSortedByGroup[index - 1].acf.spot ? (
                     <FilterList
@@ -131,22 +131,22 @@ function SortData({ children }) {
               </div>
             </DropDown>
 
-            <DropDown button="Groupe +">
-              <div className="flex flex-col">
+            <DropDown button="Groupe" classe="flex flex-col justify-center items-start my-2">
+              <div className="flex flex-col items-start mt-4 mb-2">
                 {concertInfoSortedByGroup.map((post, index) => (
                   <FilterList onClick={() => handleClickFilterByGroup(post.acf.groupe)} source={post.acf.groupe} key={index} />
                 ))}
               </div>
             </DropDown>
 
-            <button className="text-left mt-2 w-full" onClick={() => { setSortInfo(concertInfo) }}>Effacer Filtres</button>
+            <button className=" bg-slate-700 w-fit h-fit p-2 text-m text-white rounded-xl" onClick={() => { setSortInfo(concertInfo) }}>Effacer Filtres</button>
           </div>
         </DropDown>
-        <DropDown button="Trier">
+        <DropDown button="Trier" classe="flex flex-col justify-center items-end my-2">
           <div className="flex flex-col items-end mt-2">
-            <button className="mt-2" onClick={handleClickSortByDate}>Date</button>
-            <button className="mt-2" onClick={handleClickSortByGroup}>Groupe</button>
-            <button className="mt-2" onClick={handleClickSortBySpot}>Emplacement</button>
+            <button className="pl-2 my-1 text-xl text-slate-700" onClick={handleClickSortByDate}>Date</button>
+            <button className="pl-2 my-1 text-xl text-slate-700" onClick={handleClickSortByGroup}>Groupe</button>
+            <button className="pl-2 my-1 text-xl text-slate-700" onClick={handleClickSortBySpot}>Emplacement</button>
           </div>
         </DropDown>
       </div>

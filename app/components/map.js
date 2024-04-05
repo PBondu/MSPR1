@@ -17,11 +17,20 @@ export default function Map() {
 
   // Coordonées pour tracer les limites du festival
   const polyline = [
-    [48.83965312578284, 2.3790550231933594],
-    [48.83502064451891, 2.3846769332885747],
-    [48.83390483044093, 2.3826384544372563],
-    [48.83860803023782, 2.3764801025390625],
-    [48.83965312578284, 2.3790550231933594]
+    [48.83864333787564, 2.376534274111051],
+    [48.84000619367437, 2.379150680292162],
+    [48.83930711683455, 2.3800085183843227],
+    [48.838961105496054, 2.3799656264796947],
+    [48.8388339986898, 2.3802980387404116],
+    [48.83907408905306, 2.3803623765973336],
+    [48.83819845982036, 2.381681302664056],
+    [48.835303125153395, 2.385232916573945],
+    [48.83380595964049, 2.38248783467899],
+    [48.8353384351207, 2.3806002334218506],
+    [48.83547261276951, 2.3807396321118413],
+    [48.836955604950674, 2.3788416653329008],
+    [48.836955604950674, 2.3788416653329008],
+    [48.83864333787564, 2.376534274111051]
   ]
 
   const [sortedMapData, setSortedMapData] = useState([]);
@@ -65,7 +74,6 @@ export default function Map() {
       ));
       setSortedMapData(mapInfoFiltered)
     });
-    console.log(concertInfoFiltered);
     // Permet de n'afficher aucun ping si aucun ping ne correspond à la date actuelle
     concertInfoFiltered.length == 0 ? setSortedMapData([]) : null
   };
@@ -85,13 +93,13 @@ export default function Map() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-[#febd02] h-40">
+      <div className="flex flex-col justify-center items-center bg-[#febd02] h-56">
         <h3 className="text-[#e72a1c] text-xl h-1/4 pt-2">Filtres de la carte</h3>
-        <div className="flex flex-row justify-around items-center w-full h-1/2 ">
+        <div className="flex flex-row flex-wrap justify-around items-center w-full h-32 ">
           <MapFilterButton onClick={() => { handleClickFilterByPing("Scène") }} name="Scène" ping="./location-dot-solid-bleu.svg" />
           <MapFilterButton onClick={() => { handleClickFilterByPing("Shop") }} name="Shop" ping="./location-dot-solid-orange.svg" />
           <MapFilterButton onClick={() => { handleClickFilterByPing("Toilette") }} name="Toilette" ping="./location-dot-solid-jaune.svg" />
-          <MapFilterButton onClick={handleClickFilterByPresentHour} name="actual" ping="./location-dot-solid-jaune.svg" />
+          <MapFilterButton onClick={handleClickFilterByPresentHour} name="Concerts en cours" ping="./location-dot-solid-bleu.svg" />
         </div>
         <button className="flex flex-row justify-center bg-slate-700 w-fit h-10 px-3 mb-4 text-m text-white items-center rounded-xl" onClick={() => { setSortedMapData(mapInfo) }}>Effacer Filtres</button>
       </div>
@@ -109,7 +117,7 @@ export default function Map() {
           {/* Limites du festival */}
           <Polyline positions={polyline} pathOptions={{ color: "red" }} />
           {/* Cercle + tooltip afichant l'entrée du festival */}
-          <Circle center={[48.838678645488564, 2.3801171779632573]} pathOptions={{ color: "Blue" }} radius={25}>
+          <Circle center={[48.8390670275882, 2.380160591399623]} pathOptions={{ color: "Blue" }} radius={25}>
             <Tooltip direction="top" offset={[0, -20]} opacity={0.8} permanent>
               Entrée du festival
             </Tooltip>
@@ -117,9 +125,10 @@ export default function Map() {
           {/* Afiiche les marqueurs de la map */}
           {sortedMapData.map((marker) => (
             // Le ternaire sert à changer la couleur en fonction du type de commodité
+            console.log(marker.acf.name),
             marker.acf.type === "Scène" ? (
               <Marker key={marker.id} position={[marker.acf.latitude, marker.acf.longitude]} icon={new Icon({ iconUrl: "./location-dot-solid-bleu.svg", iconSize: [18, 30], iconAnchor: [10, 30] })}>
-                <Popup >
+                <Popup offset={[0, -20]}>
                   <div className='font-bold'>
                     {marker.acf.name}
                   </div>
@@ -138,7 +147,7 @@ export default function Map() {
               </Marker>)
               : marker.acf.type === "Shop" ? (
                 <Marker key={marker.id} position={[marker.acf.latitude, marker.acf.longitude]} icon={new Icon({ iconUrl: "./location-dot-solid-orange.svg", iconSize: [18, 30], iconAnchor: [10, 30] })}>
-                  <Popup >
+                  <Popup offset={[0, -20]}>
                     <div className='font-bold'>
                       {marker.acf.name}
                     </div>
@@ -148,7 +157,7 @@ export default function Map() {
                 </Marker>)
                 : marker.acf.type === "Toilette" ? (
                   <Marker key={marker.id} position={[marker.acf.latitude, marker.acf.longitude]} icon={new Icon({ iconUrl: "./location-dot-solid-jaune.svg", iconSize: [18, 30], iconAnchor: [10, 30] })}>
-                    <Popup >
+                    <Popup offset={[0, -20]}>
                       <div className='font-bold'>
                         {marker.acf.name}
                       </div>

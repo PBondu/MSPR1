@@ -9,7 +9,7 @@ const FetchConcertData = ({ children }) => {
   const [concertData, setConcertData] = useState([]);
   useEffect(() => {
     async function loadConcertData() {
-      const response = await fetch('http://localhost/zikos/wp-json/wp/v2/concert');
+      const response = await fetch('http://localhost/zikos/wp-json/wp/v2/concert?per_page=25');
       if (!response.ok) {
         console.log("response not ok");
         return;

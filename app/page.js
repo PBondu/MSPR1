@@ -2,6 +2,7 @@ import { FetchConcertData } from "./components/fetchConcertWp";
 import { SortData } from "./components/sortConcertData";
 import { FetchMapData } from "./components/fetchMapWp";
 import { FetchPartners } from "./components/fetchPartners";
+import {Geoloc} from "./components/geoloc";
 import Header from "/app/components/header";
 import LineUp from "/app/components/lineUp"
 import Map from "./components/map";
@@ -11,15 +12,15 @@ import Billeterie from "./components/billeterie";
 import Infos from "./components/infoPratiques";
 import SocialMedia from "./components/socialMedia";
 import Partners from "./components/partners";
+import Image from 'next/image';
 
 export default function Index() {
   return (
     <>
       <FetchConcertData>
-
+        <div id="accueil"></div>
         <Header />
         <Welcome />
-
         <div id="prog"></div>
         <Title title="Programmation" />
         <SortData>
@@ -42,14 +43,16 @@ export default function Index() {
         <FetchPartners>
           <Partners />
         </FetchPartners>
-
-        <FetchMapData>
-          <div id="map"></div>
-          <Title title="Carte du Festival" />
-          <Map />
-        </FetchMapData>
-        
+        <Geoloc>
+          <FetchMapData>
+            <div id="map"></div>
+            <Title title="Carte du Festival" />
+            <Map />
+          </FetchMapData>
+        </Geoloc>
       </FetchConcertData>
+      <a href="#accueil" className="fixed bottom-0 right-0 p-2 mr-3 mb-4 z-50 w-fit h-fit bg-slate-300/[.7] rounded-xl"><Image src={"./arrow-up-solidWhite.svg"} width={25} height={25} alt="" /></a>
+
     </>
   );
 }

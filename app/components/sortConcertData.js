@@ -4,6 +4,8 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { DataConcertWp } from './fetchConcertWp';
 import DropDown from './dropDown';
 import FilterList from './filterList';
+import FilterSelect from './filterSelect';
+
 
 const SortedInfo = createContext();
 
@@ -119,23 +121,27 @@ function SortData({ children }) {
 
             <DropDown button="Emplacement" classe="flex flex-col justify-center items-start my-2">
               <div className="flex flex-col items-start mt-4">
-                {concertInfoSortedByGroup.map((post, index) => (
-                  index === 0 || post.acf.spot !== concertInfoSortedByGroup[index - 1].acf.spot ? (
-                    <FilterList
-                      onClick={() => handleClickFilterBySpot(post.acf.spot)}
-                      source={post.acf.spot}
-                      key={index}
-                    />
-                  ) : null
-                ))}
+                {concertInfoSortedByGroup
+                  .sort((a, b) => a.acf.spot.localeCompare(b.acf.spot))
+                  .map((post, index) => (
+                    index === concertInfoSortedByGroup.length - 1 || post.acf.spot !== concertInfoSortedByGroup[index + 1].acf.spot ? (
+                      <FilterList
+                        onClick={() => handleClickFilterBySpot(post.acf.spot)}
+                        source={post.acf.spot}
+                        key={index}
+                      />
+                    ) : null
+                  ))}
               </div>
             </DropDown>
 
             <DropDown button="Groupe" classe="flex flex-col justify-center items-start my-2">
               <div className="flex flex-col items-start mt-4 mb-2">
-                {concertInfoSortedByGroup.map((post, index) => (
-                  <FilterList onClick={() => handleClickFilterByGroup(post.acf.groupe)} source={post.acf.groupe} key={index} />
-                ))}
+                <select className="text-slate-700 p-2 rounded-lg">
+                  {concertInfoSortedByGroup.map((post, index) => (
+                    <FilterSelect onClick={() => handleClickFilterByGroup(post.acf.groupe)} source={post.acf.groupe} key={index} />
+                  ))}
+                </select>
               </div>
             </DropDown>
 

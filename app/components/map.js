@@ -8,12 +8,27 @@ import { DataConcertWp } from './fetchConcertWp';
 import MapFilterButton from './mapFilterButton';
 import Image from 'next/image';
 import moment from 'moment';
-
+import { DataGeoloc } from './geoloc';
+import RoutingMachine from './routing';
 
 export default function Map() {
   // Récupère les datas de wp
   const mapInfo = useContext(DataMapWp);
   const concertInfo = useContext(DataConcertWp);
+  const geoloc = useContext(DataGeoloc);
+
+  // UseState d'acitvation du composant d'itinéraire
+  const [isActive, setIsActive] = useState(false);
+  // Fonction d'activation de l'itinéraire
+  const toggleComponent = () => {
+    setIsActive(!isActive);
+    setKey(prevKey => prevKey + 1); // Met à jour la clé pour forcer le reload
+  };
+
+  // Donne la height de la map
+  const [classMap, setClassMap] = useState("h-72 z-10");
+  // Ajoute une clef unique pour forcer react à reload le composant map
+  const [key, setKey] = useState(0);
 
   // Coordonées pour tracer les limites du festival
   const polyline = [
@@ -78,18 +93,18 @@ export default function Map() {
     concertInfoFiltered.length == 0 ? setSortedMapData([]) : null
   };
 
-
-  // Donne la height de la map
-  const [classMap, setClassMap] = useState("h-72 z-10");
-  // Ajoute une clef unique pour forcer react à reload le composant map
-  const [key, setKey] = useState(0);
-
   // fonction qui met la map en full screen en changeant la class name
   function fullScreenMap() {
     const newClassMap = classMap === "h-72 z-10" ? "h-screen z-10" : "h-72 z-10";
     setClassMap(newClassMap);
     setKey(prevKey => prevKey + 1); // Met à jour la clé pour forcer le reload
   };
+
+
+  // Permet d'attendre que la geoloc soit opérationnelle avant de charger le point de localisation
+  if (!geoloc || !(geoloc instanceof GeolocationCoordinates)) {
+    return <div className="h-24 bg-[#febd02] text-[#e72a1c] flex justify-center items-center text-xl"><p>Carte en cours de chargement ...</p></div>
+  }
 
   return (
     <>
@@ -104,9 +119,17 @@ export default function Map() {
         <button className="flex flex-row justify-center bg-slate-700 w-fit h-10 px-3 mb-4 text-m text-white items-center rounded-xl" onClick={() => { setSortedMapData(mapInfo) }}>Effacer Filtres</button>
       </div>
 
+      {/* Bouton activant l'itinéraire en activant le composant */}
+      <div className="bg-[#febd02] py-2 pl-2 h-fit">
+        <button className="flex flex-row justify-center bg-slate-700 w-fit h-10 px-3 text-m text-white items-center rounded-xl" onClick={toggleComponent}>
+          {isActive ? "Désactiver L'itinéraire" : "Itinéraire vers le festival"}
+        </button>
+      </div>
+
       <div className="relative">
         {/* Bouton du full screen */}
         <a className="absolute top-0 right-0 z-50 bg-slate-700 p-2 w-fit h-fit mr-2 mt-2 rounded-xl" href="#leaflet-container" onClick={fullScreenMap}><Image src="./expand-solid.svg" width={20} height={20} alt="" /></a>
+        
         {/* début de la map */}
         <MapContainer key={key} id='leaflet-container' className={classMap} center={[48.83658898990498, 2.38145401832107]} zoom={15} scrollWheelZoom={false}>
           {/* Donnée obligatoire */}
@@ -125,7 +148,6 @@ export default function Map() {
           {/* Afiiche les marqueurs de la map */}
           {sortedMapData.map((marker) => (
             // Le ternaire sert à changer la couleur en fonction du type de commodité
-            console.log(marker.acf.name),
             marker.acf.type === "Scène" ? (
               <Marker key={marker.id} position={[marker.acf.latitude, marker.acf.longitude]} icon={new Icon({ iconUrl: "./location-dot-solid-bleu.svg", iconSize: [18, 30], iconAnchor: [10, 30] })}>
                 <Popup offset={[0, -20]}>
@@ -167,7 +189,16 @@ export default function Map() {
                   </Marker>)
                   : null
           ))};
+          {/* Point de position de l'utilisateur */}
+          <Marker position={[geoloc.latitude, geoloc.longitude]} icon={new Icon({ iconUrl: "./circle-dot-solid.svg", iconSize: [18, 30], iconAnchor: [10, 30] })}></Marker>
 
+          {isActive && <RoutingMachine
+            latUser={geoloc.latitude}
+            lngUser={geoloc.longitude}
+            latDestination={48.839180010906304}
+            lngDestination={2.3802137374877934}
+          />}
+          
         </MapContainer>
         {/* fin de la map */}
       </div>
